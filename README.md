@@ -12,4 +12,4 @@ So that's why I have created this. Given the original width and height of the im
 
 ## Usage
 
-   <img pil original-width="1024" original-height="768" ng-src="{{image}}" />
+   <img pilt original-width="1024" original-height="768" ng-src="{{image}}" />
