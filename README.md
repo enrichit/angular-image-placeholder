@@ -12,4 +12,18 @@ So that's why I have created this. Given the original width and height of the im
 
 ## Usage
 
-   <img pilt original-width="1024" original-height="768" ng-src="{{image}}" />
+Simple:
+
+    <img pilt original-width="1024" original-height="768" ng-src="{{image}}" />
+
+Which **before load** in a parent container that is 500px wide will yield:
+
+    <img plit width="500" height="375" original-height="768" ng-src="http://example.com/image.jpg" />
+
+After the image has loaded and we have a natural height and width those `width` and `height` attributes will be removed from the element to restore the natural flow of the document without forcing CSS on the element.
+
+## Tests
+
+1. Use bower to pull down frontend test dependencies. `bower install`.
+2. Install the dependencies specified in `package.json`. `npm install`.
+3. Run the tests with npm. `npm test`.

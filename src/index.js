@@ -7,11 +7,24 @@ angular.module('enrichit.pilt').directive('pilt', [
     return {
       scope: {
         x: '@originalWidth',
-        Y: '@originalHeight',
+        y: '@originalHeight'
       },
       link: function(scope, element) {
-        element.attr('width', scope.x);
-        element.attr('height', scope.y);
+        var x = parseInt(scope.x);
+        var y = parseInt(scope.y);
+
+        var width = x, height = y;
+
+        var parent = element[0].parentElement;
+
+        // if parent width is less than original width then rescale
+        if (parent && parent.offsetWidth < x) {
+          width = parent.offsetWidth;
+          height = (parent.offsetWidth / x) * y;
+        }
+
+        element.attr('width', width);
+        element.attr('height', height);
       }
     };
   }
