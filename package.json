@@ -1,0 +1,21 @@
+{
+  "name": "placeholder-image-loader",
+  "version": "0.0.0",
+  "description": "Given the width and height of an image before it downloads, set the appropriate `width` and `height` html attributes before the image has loaded.",
+  "main": "index.js",
+  "dependencies": {
+    "jasmine-core": "^2.3.4",
+    "karma-jasmine": "^0.3.6",
+    "karma-chrome-launcher": "^0.2.1"
+  },
+  "devDependencies": {
+    "karma": "^0.13.15",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-jasmine": "^0.3.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}

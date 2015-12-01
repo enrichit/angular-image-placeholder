@@ -1,0 +1,26 @@
+{
+  "name": "placeholder-image-loader",
+  "description": "Given the width and height of an image before it downloads, set the appropriate `width` and `height` html attributes before the image has loaded.",
+  "main": "index.js",
+  "authors": [
+    "Richard Vanbergen <rich@enrich.it>"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular": "~1.4.8",
+    "angular-mocks": "~1.4.8"
+  }
+}
