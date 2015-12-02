@@ -3,15 +3,18 @@ angular.module('enrichit.ng-image-utils', []);
 angular.module('enrichit.ng-image-utils').directive('placeholderSpinner', [
 
   '$compile',
+  '$http',
+  '$templateCache',
 
-  function ($compile) {
+  function ($compile, $http, $templateCache) {
     'use strict';
 
     return {
       scope: {
         loadClass: '@psLoadClass',
         completeClass: '@psCompleteClass',
-        templateString: '@psTemplateString'
+        templateString: '@psTemplateString',
+        templateUrl: '@psTemplateUrl'
       },
       link: function(scope, element) {
         var loadClass = scope.loadClass || 'ps-load';
@@ -20,6 +23,11 @@ angular.module('enrichit.ng-image-utils').directive('placeholderSpinner', [
 
         if (scope.templateString) {
           element.parent().append($compile(scope.templateString)(scope));
+        } else if(scope.templateUrl) {
+          $http.get(scope.templateUrl, {cache: $templateCache})
+            .success(function(response) {
+              element.parent().append($compile(response)(scope));
+            });
         }
 
         element.on('load', function() {
