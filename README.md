@@ -67,6 +67,7 @@ You can customize the class names. Refer to the API below.
 
 * ~~Restrict `iu-spinner` and `iu-sizes` to attributes, not elements.~~
 * Add to NPM directory.
+* Add ngDocs.
 
 ## Tests
 
