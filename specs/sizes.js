@@ -72,4 +72,4 @@ describe('Unit: placeholderSizes directive.', function () {
     expect($image.attr('width')).toBe('500');
     expect($image.attr('height')).toBe('375');
   });
-})
+});
