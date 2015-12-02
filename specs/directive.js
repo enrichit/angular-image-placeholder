@@ -1,5 +1,5 @@
 describe('Unit: placeholderSizes directive.', function () {
-  var _compile_, _rootScope_;
+  var _compile_, _rootScope_, _window_;
 
   function createPlaything(containerWidth) {
     var container = document.createElement('div');
@@ -23,9 +23,10 @@ describe('Unit: placeholderSizes directive.', function () {
 
   beforeEach(module('enrichit.ng-image-utils'));
 
-  beforeEach(inject(['$rootScope', '$compile', function ($rootScope, $compile) {
+  beforeEach(inject(['$rootScope', '$compile', '$window', function ($rootScope, $compile, $window) {
     _compile_ = $compile;
     _rootScope_ = $rootScope;
+    _window_ = $window;
   }]));
 
   it('it exists and test framework is set up correctly', function () {
@@ -59,5 +60,16 @@ describe('Unit: placeholderSizes directive.', function () {
 
     expect($image.attr('width')).toBeUndefined();
     expect($image.attr('height')).toBeUndefined();
+  });
+
+  it('adjusts as you resize the container when loading', function() {
+    var $plaything = createPlaything(2000);
+    var $image = $plaything.find('img');
+
+    $plaything[0].style.width = '500px';
+    angular.element(_window_).triggerHandler('resize');
+
+    expect($image.attr('width')).toBe('500');
+    expect($image.attr('height')).toBe('375');
   });
 })
