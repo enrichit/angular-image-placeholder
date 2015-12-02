@@ -1,7 +1,7 @@
-describe('Unit: pilt directive.', function () {
+describe('Unit: placeholderSizes directive.', function () {
   var _compile_, _rootScope_;
 
-  beforeEach(module('enrichit.pilt'));
+  beforeEach(module('enrichit.ng-image-utils'));
 
   beforeEach(inject(['$rootScope', '$compile', function ($rootScope, $compile) {
     _compile_ = $compile;
@@ -9,7 +9,7 @@ describe('Unit: pilt directive.', function () {
   }]));
 
   it('it exists and test framework is set up correctly', function () {
-    $elem = _compile_('<img pilt original-width="1024" original-height="768" ng-src="http://lorempixel.com/1000/1000/" />')(_rootScope_);
+    $elem = _compile_('<img placeholder-sizes ps-width="1024" ps-height="768" ng-src="http://lorempixel.com/1000/1000/" />')(_rootScope_);
 
     expect($elem.attr('width')).toBe('1024');
     expect($elem.attr('height')).toBe('768');
@@ -24,9 +24,9 @@ describe('Unit: pilt directive.', function () {
 
     var img = document.createElement('img');
 
-    img.setAttribute('pilt', '');
-    img.setAttribute('original-width', '1024');
-    img.setAttribute('original-height', '768');
+    img.setAttribute('placeholder-sizes', '');
+    img.setAttribute('ps-width', '1024');
+    img.setAttribute('ps-height', '768');
 
     container.appendChild(img);
 
@@ -57,7 +57,7 @@ describe('Unit: pilt directive.', function () {
 
   it('doesn\'t throw error when no parent container is found', function () {
     expect(function() {
-      _compile_('<img pilt original-width="1024" original-height="768" ng-src="http://lorempixel.com/1000/1000/" />')(_rootScope_);
+      _compile_('<img placeholder-sizes ps-width="1024" ps-height="768" ng-src="http://lorempixel.com/1000/1000/" />')(_rootScope_);
     }).not.toThrow();
   });
 })

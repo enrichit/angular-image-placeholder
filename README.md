@@ -1,26 +1,26 @@
-# Placeholder Image Loader Thing (working title)
+# Ng Image Placeholder
 
 ## Introduction
 
-Because I honestly don't know what else to call it.
-
-Sometimes when you want to load a bunch of images into a document it's a good idea to set the height and/or with attributes on the image to prevent the content from jumping all over the place as the images load in.
-
-Unfortunately this isn't always possible with responsive designs as the images are resized by CSS after the fact so setting the width and height causes images to render really screwy. Unless you nullify that with CSS, in which case it was all pointless.
-
-So that's why I have created this. Given the original width and height of the image being loaded and the width of the parent container of the element, we can dynamically set the resized height temporarily until the image has loaded in.
+A (very) small collection of directives to help with the loading of images.
 
 ## Usage
 
+### Placeholder sizes
+
+Setting the `width` and `height` attributes on an image can be desirable if you have something like a grid of images. Unfortunately even if you can return width and height of images before you load the image in the users browser setting these attributes will often overflow thier bounds.
+
+This is a simple little directive which dynamically sets those attributes while the image loads and removes those attributes once it that is done to restore the natural flow.
+
 Simple:
 
-    <img pilt original-width="1024" original-height="768" ng-src="{{image}}" />
+    <img placeholder-sizes ps-width="1024" ps-height="768" ng-src="{{image}}" />
 
 Which **before load** in a parent container that is 500px wide will yield:
 
-    <img plit width="500" height="375" original-height="768" ng-src="http://example.com/image.jpg" />
+    <img placeholder-sizes width="500" height="375" ps-width="1024" ps-height="768" src="..." ng-src="..." />
 
-After the image has loaded and we have a natural height and width those `width` and `height` attributes will be removed from the element to restore the natural flow of the document without forcing CSS on the element.
+As mentioned before, after load those `width` and `height` attributes will be removed.
 
 ## Tests
 

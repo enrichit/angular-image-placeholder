@@ -1,7 +1,7 @@
 {
-  "name": "placeholder-image-loader",
-  "version": "0.0.0",
-  "description": "Given the width and height of an image before it downloads, set the appropriate `width` and `height` html attributes before the image has loaded.",
+  "name": "ng-image-utils",
+  "version": "0.0.1",
+  "description": "A small collection of directives to help with the loading of images.",
   "main": "index.js",
   "dependencies": {
   },
@@ -23,6 +23,6 @@
   "scripts": {
     "test": "./node_modules/karma/bin/karma start"
   },
-  "author": "",
+  "author": "Richard Vanbergen <rich@enrich.it>",
   "license": "MIT"
 }
