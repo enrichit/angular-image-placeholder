@@ -21,7 +21,7 @@ describe('Unit: placeholderSizes directive.', function () {
     return _compile_(container)(_rootScope_);
   }
 
-  beforeEach(module('enrichit.ng-image-utils'));
+  beforeEach(module('enrichit.angular-image-utils'));
 
   beforeEach(inject(['$rootScope', '$compile', '$window', function ($rootScope, $compile, $window) {
     _compile_ = $compile;

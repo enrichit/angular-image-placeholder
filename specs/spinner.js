@@ -1,7 +1,7 @@
 describe('Unit: placeholderSpinner directive.', function () {
   var _compile_, _rootScope_, _templateCache_, _httpBackend_;
 
-  beforeEach(module('enrichit.ng-image-utils'));
+  beforeEach(module('enrichit.angular-image-utils'));
 
   beforeEach(inject(['$rootScope', '$compile', '$templateCache', '$httpBackend', function ($rootScope, $compile, $templateCache, $httpBackend) {
     _compile_ = $compile;
