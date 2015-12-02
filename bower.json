@@ -1,6 +1,6 @@
 {
-  "name": "placeholder-image-loader",
-  "description": "Given the width and height of an image before it downloads, set the appropriate `width` and `height` html attributes before the image has loaded.",
+  "name": "ng-image-utils",
+  "description": "A small collection of directives to help with the loading of images.",
   "main": "index.js",
   "authors": [
     "Richard Vanbergen <rich@enrich.it>"
