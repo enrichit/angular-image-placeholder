@@ -25,6 +25,11 @@ angular.module('enrichit.ng-image-utils').directive('placeholderSizes', [
 
         element.attr('width', width);
         element.attr('height', height);
+
+        element.on('load', function() {
+          element.removeAttr('width');
+          element.removeAttr('height');
+        });
       }
     };
   }
