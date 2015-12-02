@@ -1,6 +1,6 @@
 angular.module('enrichit.angular-image-utils', []);
 
-angular.module('enrichit.angular-image-utils').directive('placeholderSpinner', [
+angular.module('enrichit.angular-image-utils').directive('iuSpinner', [
 
   '$compile',
   '$http',
@@ -11,14 +11,14 @@ angular.module('enrichit.angular-image-utils').directive('placeholderSpinner', [
 
     return {
       scope: {
-        loadClass: '@psLoadClass',
-        completeClass: '@psCompleteClass',
-        templateString: '@psTemplateString',
-        templateUrl: '@psTemplateUrl'
+        loadClass: '@iuLoadClass',
+        completeClass: '@iuCompleteClass',
+        templateString: '@iuTemplateString',
+        templateUrl: '@iuTemplateUrl'
       },
       link: function(scope, element) {
-        var loadClass = scope.loadClass || 'ps-load';
-        var completeClass = scope.completeClass || 'ps-complete';
+        var loadClass = scope.loadClass || 'iu-load';
+        var completeClass = scope.completeClass || 'iu-complete';
         element.addClass(loadClass);
 
         if (scope.templateString) {
@@ -38,7 +38,7 @@ angular.module('enrichit.angular-image-utils').directive('placeholderSpinner', [
   }
 ]);
 
-angular.module('enrichit.angular-image-utils').directive('placeholderSizes', [
+angular.module('enrichit.angular-image-utils').directive('iuSizes', [
 
   '$window',
 
@@ -68,8 +68,8 @@ angular.module('enrichit.angular-image-utils').directive('placeholderSizes', [
 
     return {
       scope: {
-        x: '@psWidth',
-        y: '@psHeight'
+        x: '@iuWidth',
+        y: '@iuHeight'
       },
       link: function(scope, element) {
         var x = parseInt(scope.x);

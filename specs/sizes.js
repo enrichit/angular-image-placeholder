@@ -1,4 +1,4 @@
-describe('Unit: placeholderSizes directive.', function () {
+describe('Unit: iuSizes directive.', function () {
   var _compile_, _rootScope_, _window_;
 
   function createPlaything(containerWidth) {
@@ -10,9 +10,9 @@ describe('Unit: placeholderSizes directive.', function () {
 
     var img = document.createElement('img');
 
-    img.setAttribute('placeholder-sizes', '');
-    img.setAttribute('ps-width', '1024');
-    img.setAttribute('ps-height', '768');
+    img.setAttribute('iu-sizes', '');
+    img.setAttribute('iu-width', '1024');
+    img.setAttribute('iu-height', '768');
 
     container.appendChild(img);
 
@@ -30,7 +30,7 @@ describe('Unit: placeholderSizes directive.', function () {
   }]));
 
   it('it exists and test framework is set up correctly', function () {
-    $elem = _compile_('<img placeholder-sizes ps-width="1024" ps-height="768" ng-src="http://lorempixel.com/1000/1000/" />')(_rootScope_);
+    $elem = _compile_('<img iu-sizes iu-width="1024" iu-height="768" ng-src="http://lorempixel.com/1000/1000/" />')(_rootScope_);
 
     expect($elem.attr('width')).toBe('1024');
     expect($elem.attr('height')).toBe('768');
@@ -50,7 +50,7 @@ describe('Unit: placeholderSizes directive.', function () {
 
   it('doesn\'t throw error when no parent container is found', function () {
     expect(function() {
-      _compile_('<img placeholder-sizes ps-width="1024" ps-height="768" ng-src="http://lorempixel.com/1000/1000/" />')(_rootScope_);
+      _compile_('<img iu-sizes iu-width="1024" iu-height="768" ng-src="http://lorempixel.com/1000/1000/" />')(_rootScope_);
     }).not.toThrow();
   });
 
