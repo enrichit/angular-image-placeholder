@@ -10,8 +10,8 @@ var paths = {
   js: './src/*',
   out: {
     dir: './dist/',
-    file: 'pilt.js',
-    min: 'pilt.min.js'
+    file: 'ng-image-placeholder.js',
+    min: 'ng-image-placeholder.min.js'
   }
 };
 
