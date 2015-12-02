@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A (very) small collection of directives to help with the loading of images.
+A (very) small collection of directives to help with the loading of images. Will be adding more as I think of them.
 
 ## Installation
 
