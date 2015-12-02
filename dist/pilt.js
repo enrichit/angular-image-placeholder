@@ -1,13 +1,13 @@
-angular.module('enrichit.pilt', []);
+angular.module('enrichit.ng-image-utils', []);
 
-angular.module('enrichit.pilt').directive('pilt', [
+angular.module('enrichit.ng-image-utils').directive('placeholderSizes', [
   function () {
     'use strict';
 
     return {
       scope: {
-        x: '@originalWidth',
-        y: '@originalHeight'
+        x: '@psWidth',
+        y: '@psHeight'
       },
       link: function(scope, element) {
         var x = parseInt(scope.x);
@@ -25,6 +25,11 @@ angular.module('enrichit.pilt').directive('pilt', [
 
         element.attr('width', width);
         element.attr('height', height);
+
+        element.on('load', function() {
+          element.removeAttr('width');
+          element.removeAttr('height');
+        });
       }
     };
   }
