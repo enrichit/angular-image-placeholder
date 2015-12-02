@@ -1,6 +1,6 @@
-angular.module('enrichit.ng-image-utils', []);
+angular.module('enrichit.angular-image-utils', []);
 
-angular.module('enrichit.ng-image-utils').directive('placeholderSpinner', [
+angular.module('enrichit.angular-image-utils').directive('placeholderSpinner', [
 
   '$compile',
   '$http',
@@ -38,7 +38,7 @@ angular.module('enrichit.ng-image-utils').directive('placeholderSpinner', [
   }
 ]);
 
-angular.module('enrichit.ng-image-utils').directive('placeholderSizes', [
+angular.module('enrichit.angular-image-utils').directive('placeholderSizes', [
 
   '$window',
 
