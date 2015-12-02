@@ -1,5 +1,35 @@
 angular.module('enrichit.ng-image-utils', []);
 
+angular.module('enrichit.ng-image-utils').directive('placeholderSpinner', [
+
+  '$compile',
+
+  function ($compile) {
+    'use strict';
+
+    return {
+      scope: {
+        loadClass: '@psLoadClass',
+        completeClass: '@psCompleteClass',
+        templateString: '@psTemplateString'
+      },
+      link: function(scope, element) {
+        var loadClass = scope.loadClass || 'ps-load';
+        var completeClass = scope.completeClass || 'ps-complete';
+        element.addClass(loadClass);
+
+        if (scope.templateString) {
+          element.parent().append($compile(scope.templateString)(scope));
+        }
+
+        element.on('load', function() {
+          element.addClass(completeClass);
+        });
+      }
+    };
+  }
+]);
+
 angular.module('enrichit.ng-image-utils').directive('placeholderSizes', [
 
   '$window',
