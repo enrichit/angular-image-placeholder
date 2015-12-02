@@ -65,7 +65,7 @@ You can customize the class names. Refer to the API below.
 
 ## Todo
 
-* Restrict `iu-spinner` and `iu-sizes` to attributes, not elements.
+* ~~Restrict `iu-spinner` and `iu-sizes` to attributes, not elements.~~
 
 ## Tests
 

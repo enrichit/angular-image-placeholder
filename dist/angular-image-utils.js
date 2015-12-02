@@ -10,6 +10,7 @@ angular.module('enrichit.angular-image-utils').directive('iuSpinner', [
     'use strict';
 
     return {
+      restrict: 'A',
       scope: {
         loadClass: '@iuLoadClass',
         completeClass: '@iuCompleteClass',
@@ -67,6 +68,7 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
     }
 
     return {
+      restrict: 'A',
       scope: {
         x: '@iuWidth',
         y: '@iuHeight'
