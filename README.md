@@ -60,7 +60,7 @@ You can customize the class names. Refer to the API below.
 
 * `iu-template-string`: The template to insert into the bottom of the parent container. Optional if `iu-template-url` is specified.  
 * `iu-template-url`: Dynamically loads a template to insert into the bottom of the parent container via Angular's `$http` service. Optional if `iu-template-string` is specified.  
-* `iu-complete-load`: Change class that is added when the `link()` function on the directive is called. Optional. Default `iu-load`.  
+* `iu-load-class`: Change class that is added when the `link()` function on the directive is called. Optional. Default `iu-load`.  
 * `iu-complete-class`: Change class that is added when the image element finished loading. Optional. Default `iu-complete`.
 
 ## Todo
