@@ -13,7 +13,7 @@ angular.module('enrichit.angular-image-utils').directive('iuSpinner', [
       restrict: 'A',
       link: function(scope, element, attributes) {
         var parent = element.parent();
-        if (!parent) return;
+        if ( ! parent) return;
 
         var loadClass = attributes.iuLoadClass || 'iu-load';
         var completeClass = attributes.iuCompleteClass || 'iu-complete';
@@ -36,6 +36,15 @@ angular.module('enrichit.angular-image-utils').directive('iuSpinner', [
           })
           .on('error', function() {
             parent.addClass(errorClass);
+            
+            if (attributes.iuErrorReplaceString) {
+              element.replaceWith($compile(attributes.iuErrorReplaceString)(scope));
+            } else if(attributes.iuErrorReplaceUrl) {
+              $http.get(attributes.iuErrorReplaceUrl, { cache: $templateCache })
+                .success(function(response) {
+                  element.replaceWith($compile(response)(scope));
+                });
+            }
           });
       }
     };

@@ -74,4 +74,19 @@ describe('Unit: iuSpinner directive.', function () {
     _httpBackend_.flush();
     expect($elem.find('p').length).toBe(1);
   });
+
+  it('replaces img with string on error', function() {
+    $elem = _compile_('<div><img iu-spinner iu-error-replace-string="<p>Hello World!</p>" /></div>')(_rootScope_);
+    $elem.find('img').triggerHandler('error');
+    expect($elem.find('img').length).toBe(0);
+    expect($elem.find('p').length).toBe(1);
+  });
+  
+  it('replaces img with template on error', function() {
+    $elem = _compile_('<div><img iu-spinner iu-error-replace-url="test.html" /></div>')(_rootScope_);
+    $elem.find('img').triggerHandler('error');
+    _httpBackend_.flush();
+    expect($elem.find('img').length).toBe(0);
+    expect($elem.find('p').length).toBe(1);
+  });
 });
