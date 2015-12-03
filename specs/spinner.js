@@ -42,6 +42,18 @@ describe('Unit: iuSpinner directive.', function () {
     $elem.find('img').triggerHandler('load');
     expect($elem.hasClass('iu-complete')).toBe(true);
   });
+  
+  it('adds error classes', function() {
+    $elem = _compile_('<div><img iu-spinner /></div>')(_rootScope_);
+    $elem.find('img').triggerHandler('error');
+    expect($elem.hasClass('iu-error')).toBe(true);
+  });
+  
+  it('can customize error classes', function() {
+    $elem = _compile_('<div><img iu-spinner iu-error-class="hodor" /></div>')(_rootScope_);
+    $elem.find('img').triggerHandler('error');
+    expect($elem.hasClass('hodor')).toBe(true);
+  });
 
   it('allows you to customize the loading class names', function() {
     $elem = _compile_('<div><img iu-spinner iu-load-class="abaloogawoogawoo" iu-complete-class="aflibidybibidybob" /></div>')(_rootScope_);

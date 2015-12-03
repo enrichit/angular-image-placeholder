@@ -17,21 +17,26 @@ angular.module('enrichit.angular-image-utils').directive('iuSpinner', [
 
         var loadClass = attributes.iuLoadClass || 'iu-load';
         var completeClass = attributes.iuCompleteClass || 'iu-complete';
+        var errorClass = attributes.iuErrorClass || 'iu-error';
 
         parent.addClass(loadClass);
 
         if (attributes.iuTemplateString) {
           parent.append($compile(attributes.iuTemplateString)(scope));
         } else if(attributes.iuTemplateUrl) {
-          $http.get(attributes.iuTemplateUrl, {cache: $templateCache})
+          $http.get(attributes.iuTemplateUrl, { cache: $templateCache })
             .success(function(response) {
               parent.append($compile(response)(scope));
             });
         }
 
-        element.on('load', function() {
-          parent.addClass(completeClass);
-        });
+        element
+          .on('load', function() {
+            parent.addClass(completeClass);
+          })
+          .on('error', function() {
+            parent.addClass(errorClass);
+          });
       }
     };
   }
