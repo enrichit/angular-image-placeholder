@@ -3,6 +3,15 @@ describe('Unit: iuSpinner directive.', function () {
 
   beforeEach(module('enrichit.angular-image-utils'));
 
+  beforeEach(module('enrichit.angular-image-utils', function($compileProvider){
+    $compileProvider.directive('testIsolated', function() {
+      return {
+        restrict:'A',
+        scope: {}
+      };
+    });
+  }));
+
   beforeEach(inject(['$rootScope', '$compile', '$templateCache', '$httpBackend', function ($rootScope, $compile, $templateCache, $httpBackend) {
     _compile_ = $compile;
     _rootScope_ = $rootScope;
@@ -18,6 +27,12 @@ describe('Unit: iuSpinner directive.', function () {
     $elem = _compile_('<img iu-spinner />')(_rootScope_);
 
     expect($elem.hasClass('iu-load')).toBe(true);
+  });
+  
+  it('does not require an isolatead scope', function() {
+    expect(function () {
+      _compile_('<div><img iu-spinner test-isolated /></div>')(_rootScope_);
+    }).not.toThrow();
   });
 
   it('adds the correct classes', function() {

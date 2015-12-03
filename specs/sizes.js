@@ -23,6 +23,15 @@ describe('Unit: iuSizes directive.', function () {
 
   beforeEach(module('enrichit.angular-image-utils'));
 
+  beforeEach(module('enrichit.angular-image-utils', function($compileProvider){
+    $compileProvider.directive('testIsolated', function() {
+      return {
+        restrict:'A',
+        scope: {}
+      };
+    });
+  }));
+
   beforeEach(inject(['$rootScope', '$compile', '$window', function ($rootScope, $compile, $window) {
     _compile_ = $compile;
     _rootScope_ = $rootScope;
@@ -34,6 +43,12 @@ describe('Unit: iuSizes directive.', function () {
 
     expect($elem.attr('width')).toBe('1024');
     expect($elem.attr('height')).toBe('768');
+  });
+  
+  it('does not require an isolatead scope', function() {
+    expect(function () {
+      _compile_('<div><img iu-sizes test-isolated /></div>')(_rootScope_);
+    }).not.toThrow();
   });
 
   it('doesn\'t resize when container is bigger than it', function () {

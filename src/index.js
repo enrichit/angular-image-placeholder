@@ -11,21 +11,15 @@ angular.module('enrichit.angular-image-utils').directive('iuSpinner', [
 
     return {
       restrict: 'A',
-      scope: {
-        loadClass: '@iuLoadClass',
-        completeClass: '@iuCompleteClass',
-        templateString: '@iuTemplateString',
-        templateUrl: '@iuTemplateUrl'
-      },
-      link: function(scope, element) {
-        var loadClass = scope.loadClass || 'iu-load';
-        var completeClass = scope.completeClass || 'iu-complete';
+      link: function(scope, element, attributes) {
+        var loadClass = attributes.iuLoadClass || 'iu-load';
+        var completeClass = attributes.iuCompleteClass || 'iu-complete';
         element.addClass(loadClass);
 
-        if (scope.templateString) {
-          element.parent().append($compile(scope.templateString)(scope));
-        } else if(scope.templateUrl) {
-          $http.get(scope.templateUrl, {cache: $templateCache})
+        if (attributes.iuTemplateString) {
+          element.parent().append($compile(attributes.iuTemplateString)(scope));
+        } else if(attributes.iuTemplateUrl) {
+          $http.get(attributes.iuTemplateUrl, {cache: $templateCache})
             .success(function(response) {
               element.parent().append($compile(response)(scope));
             });
@@ -69,13 +63,9 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
 
     return {
       restrict: 'A',
-      scope: {
-        x: '@iuWidth',
-        y: '@iuHeight'
-      },
-      link: function(scope, element) {
-        var x = parseInt(scope.x);
-        var y = parseInt(scope.y);
+      link: function(scope, element, attributes) {
+        var x = parseInt(attributes.iuWidth);
+        var y = parseInt(attributes.iuHeight);
 
         setAttributes(element, x, y);
 
