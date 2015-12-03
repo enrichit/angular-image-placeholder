@@ -12,21 +12,25 @@ angular.module('enrichit.angular-image-utils').directive('iuSpinner', [
     return {
       restrict: 'A',
       link: function(scope, element, attributes) {
+        var parent = element.parent();
+        if (!parent) return;
+
         var loadClass = attributes.iuLoadClass || 'iu-load';
         var completeClass = attributes.iuCompleteClass || 'iu-complete';
-        element.addClass(loadClass);
+
+        parent.addClass(loadClass);
 
         if (attributes.iuTemplateString) {
-          element.parent().append($compile(attributes.iuTemplateString)(scope));
+          parent.append($compile(attributes.iuTemplateString)(scope));
         } else if(attributes.iuTemplateUrl) {
           $http.get(attributes.iuTemplateUrl, {cache: $templateCache})
             .success(function(response) {
-              element.parent().append($compile(response)(scope));
+              parent.append($compile(response)(scope));
             });
         }
 
         element.on('load', function() {
-          element.addClass(completeClass);
+          parent.addClass(completeClass);
         });
       }
     };

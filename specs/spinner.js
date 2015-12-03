@@ -24,7 +24,7 @@ describe('Unit: iuSpinner directive.', function () {
   });
 
   it('it exists and test framework is set up correctly', function() {
-    $elem = _compile_('<img iu-spinner />')(_rootScope_);
+    $elem = _compile_('<div><img iu-spinner /></div>')(_rootScope_);
 
     expect($elem.hasClass('iu-load')).toBe(true);
   });
@@ -36,16 +36,16 @@ describe('Unit: iuSpinner directive.', function () {
   });
 
   it('adds the correct classes', function() {
-    $elem = _compile_('<img iu-spinner />')(_rootScope_);
+    $elem = _compile_('<div><img iu-spinner /></div>')(_rootScope_);
     expect($elem.hasClass('iu-load')).toBe(true);
     expect($elem.hasClass('iu-complete')).toBe(false);
-    $elem.triggerHandler('load');
+    $elem.find('img').triggerHandler('load');
     expect($elem.hasClass('iu-complete')).toBe(true);
   });
 
   it('allows you to customize the loading class names', function() {
-    $elem = _compile_('<img iu-spinner iu-load-class="abaloogawoogawoo" iu-complete-class="aflibidybibidybob" />')(_rootScope_);
-    $elem.triggerHandler('load');
+    $elem = _compile_('<div><img iu-spinner iu-load-class="abaloogawoogawoo" iu-complete-class="aflibidybibidybob" /></div>')(_rootScope_);
+    $elem.find('img').triggerHandler('load');
     expect($elem.hasClass('iu-load')).toBe(false);
     expect($elem.hasClass('iu-complete')).toBe(false);
     expect($elem.hasClass('abaloogawoogawoo')).toBe(true);
