@@ -2,7 +2,7 @@
 
 ## Introduction
 
-A (very) small collection of directives to help with the loading of images.
+A (very) small collection of directives to help with the loading of images. Will be adding more as I think of them.
 
 ## Installation
 
@@ -53,19 +53,21 @@ You can customize the class names. Refer to the API below.
 
 ### iu-sizes
 
-> `iu-width`: The original width of the image in pixels. Required.  
-> `iu-height`: The original width of the image in pixels. Required.
+* `iu-width`: The original width of the image in pixels. Required.  
+* `iu-height`: The original width of the image in pixels. Required.
 
 ### iu-spinner
 
-> `iu-template-string`: The template to insert into the bottom of the parent container. Optional if `iu-template-url` is specified.  
-> `iu-template-url`: Dynamically loads a template to insert into the bottom of the parent container via Angular's `$http` service. Optional if `iu-template-string` is specified.  
-> `iu-complete-load`: Change class that is added when the `link()` function on the directive is called. Optional. Default `iu-load`.  
-> `iu-complete-class`: Change class that is added when the image element finished loading. Optional. Default `iu-complete`.
+* `iu-template-string`: The template to insert into the bottom of the parent container. Optional if `iu-template-url` is specified.  
+* `iu-template-url`: Dynamically loads a template to insert into the bottom of the parent container via Angular's `$http` service. Optional if `iu-template-string` is specified.  
+* `iu-load-class`: Change class that is added when the `link()` function on the directive is called. Optional. Default `iu-load`.  
+* `iu-complete-class`: Change class that is added when the image element finished loading. Optional. Default `iu-complete`.
 
 ## Todo
 
 * ~~Restrict `iu-spinner` and `iu-sizes` to attributes, not elements.~~
+* Add to NPM directory.
+* Add ngDocs.
 
 ## Tests
 
