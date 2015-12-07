@@ -1,11 +1,15 @@
 describe('Unit: iuSizes directive.', function () {
   var _compile_, _rootScope_, _window_;
 
-  function createPlaything(containerWidth) {
+  function createPlaything(containerWidth, padding) {
     var container = document.createElement('div');
 
     if (containerWidth) {
       container.style.width = containerWidth + 'px';
+    }
+    
+    if (padding) {
+      container.style.padding = padding + 'px';
     }
 
     var img = document.createElement('img');
@@ -83,6 +87,14 @@ describe('Unit: iuSizes directive.', function () {
 
     $plaything[0].style.width = '500px';
     angular.element(_window_).triggerHandler('resize');
+
+    expect($image.attr('width')).toBe('500');
+    expect($image.attr('height')).toBe('375');
+  });
+  
+  it('ignores padding of parent element', function() {
+    var $plaything = createPlaything(500, 10);
+    var $image = $plaything.find('img');
 
     expect($image.attr('width')).toBe('500');
     expect($image.attr('height')).toBe('375');

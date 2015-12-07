@@ -64,15 +64,30 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
         if (c instanceof Function) c();
       });
     });
+    
+    function getComputedWidth(element) {
+      var style;
+ 
+      try {
+        style = window.getComputedStyle(element, null).getPropertyValue('width');
+      } catch(e) {
+        style = element.currentStyle.height;
+      }
+      
+      return parseInt(style);
+    }
 
     function setAttributes(element, x, y) {
       var width = x, height = y;
 
       var parent = element[0].parentElement;
 
-      if (parent && parent.offsetWidth < x) {
-        width = parent.offsetWidth;
-        height = (parent.offsetWidth / x) * y;
+      if (parent) {
+        var computedWidth = getComputedWidth(parent);
+        if (computedWidth < x) {
+          width = computedWidth;
+          height = (computedWidth / x) * y;
+        }
       }
 
       element.attr('width', width);
