@@ -61,7 +61,8 @@ You can customize the class names. Refer to the API below.
 ### iu-sizes
 
 * `iu-width`: The original width of the image in pixels. Required.  
-* `iu-height`: The original width of the image in pixels. Required.
+* `iu-height`: The original width of the image in pixels. Required.   
+* `iu-scale-up`: Boolean to override the default behaviour of not up-scaling images. Optional.
 
 ### iu-spinner
 

@@ -1,7 +1,7 @@
 describe('Unit: iuSizes directive.', function () {
   var _compile_, _rootScope_, _window_;
 
-  function createPlaything(containerWidth, padding) {
+  function createPlaything(containerWidth, padding, optionalImageAttributes) {
     var container = document.createElement('div');
 
     if (containerWidth) {
@@ -17,6 +17,11 @@ describe('Unit: iuSizes directive.', function () {
     img.setAttribute('iu-sizes', '');
     img.setAttribute('iu-width', '1024');
     img.setAttribute('iu-height', '768');
+
+    optionalImageAttributes = optionalImageAttributes || {};
+    for (var attr in optionalImageAttributes) {
+      img.setAttribute(attr, optionalImageAttributes[attr]);
+    }
 
     container.appendChild(img);
 
@@ -98,5 +103,14 @@ describe('Unit: iuSizes directive.', function () {
 
     expect($image.attr('width')).toBe('500');
     expect($image.attr('height')).toBe('375');
+  });
+  
+  it('allows you to set scale up with option when container is larger than element', function() {
+    var $image = createPlaything(2000, 0, {
+      'iu-scale-up': 'true'
+    }).find('img');
+
+    expect($image.attr('width')).toBe('2000');
+    expect($image.attr('height')).toBe('1500');
   });
 });

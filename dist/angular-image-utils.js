@@ -77,21 +77,23 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
       return parseInt(style);
     }
 
-    function setAttributes(element, x, y) {
-      var width = x, height = y;
-
-      var parent = element[0].parentElement;
-
-      if (parent) {
-        var computedWidth = getComputedWidth(parent);
-        if (computedWidth < x) {
-          width = computedWidth;
-          height = (computedWidth / x) * y;
+    function setAttributes(element, x, y, scaleUp) {
+      return function() {
+        var width = x, height = y;
+  
+        var parent = element[0].parentElement;
+  
+        if (parent) {
+          var computedWidth = getComputedWidth(parent);
+          if (computedWidth < x || scaleUp === true) {
+            width = computedWidth;
+            height = (computedWidth / x) * y;
+          }
         }
-      }
-
-      element.attr('width', width);
-      element.attr('height', height);
+  
+        element.attr('width', width);
+        element.attr('height', height);
+      };
     }
 
     return {
@@ -99,11 +101,13 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
       link: function(scope, element, attributes) {
         var x = parseInt(attributes.iuWidth);
         var y = parseInt(attributes.iuHeight);
+        var scaleUp = Boolean(attributes.iuScaleUp);
 
-        setAttributes(element, x, y);
+        var scaleFn = setAttributes(element, x, y, scaleUp);
+        scaleFn();
 
         resizeCallbacks.push(function() {
-          setAttributes(element, x, y);
+          scaleFn();
         });
 
         var index = resizeCallbacks.length - 1;
