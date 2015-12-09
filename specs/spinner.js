@@ -89,4 +89,25 @@ describe('Unit: iuSpinner directive.', function () {
     expect($elem.find('img').length).toBe(0);
     expect($elem.find('p').length).toBe(1);
   });
+  
+  it('allows you to configure the selector loader classes get applied to', function() {
+    var c1 = document.createElement('div');
+    var c2 = document.createElement('div');
+    var c3 = document.createElement('div');
+
+    c1.classList.add('testing');
+
+    var img = document.createElement('img');
+    
+    img.setAttribute('iu-spinner', '');
+    img.setAttribute('iu-parent-selector', '.testing');
+    
+    c1.appendChild(c2.appendChild(c3.appendChild(img)));
+    
+    angular.element(document).find('body').append(container);
+    var container = _compile_(c1)(_rootScope_);
+
+    expect(container.hasClass('iu-load')).toBe(true);
+    expect(container.hasClass('testing')).toBe(true);
+  });
 });

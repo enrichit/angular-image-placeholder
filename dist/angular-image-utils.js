@@ -2,17 +2,42 @@ angular.module('enrichit.angular-image-utils', []);
 
 angular.module('enrichit.angular-image-utils').directive('iuSpinner', [
 
+  '$document',
   '$compile',
   '$http',
   '$templateCache',
 
-  function ($compile, $http, $templateCache) {
+  function ($document, $compile, $http, $templateCache) {
     'use strict';
+
+    function parentsUntil(element, targetSelector) {
+      var $targets = $document.find(targetSelector);
+      while (element.parentNode) {
+        for (var i in $targets) {
+          if ($targets[i] === element) {
+            return $targets[i];
+          }
+        }
+
+        element = element.parentNode;
+      }
+    }
+    
+    function getParent(element, targetSelector) {
+      if (targetSelector) {
+        var $lookup = $document.find(parentsUntil(element[0], '.masonry-card'));
+        if ($lookup.length) {
+          return $lookup;
+        }
+      }
+      
+      return element.parent();
+    }
 
     return {
       restrict: 'A',
       link: function(scope, element, attributes) {
-        var parent = element.parent();
+        var parent = getParent(element, attributes.iuParentSelector);
         if ( ! parent) return;
 
         var loadClass = attributes.iuLoadClass || 'iu-load';

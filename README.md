@@ -67,7 +67,8 @@ You can customize the class names. Refer to the API below.
 ### iu-spinner
 
 * `iu-template-string`: The template to insert into the bottom of the parent container. Optional if `iu-template-url` is specified.  
-* `iu-template-url`: Dynamically loads a template to insert into the bottom of the parent container via Angular's `$http` service. Optional if `iu-template-string` is specified.  
+* `iu-template-url`: Dynamically loads a template to insert into the bottom of the parent container via Angular's `$http` service. Optional if `iu-template-string` is specified.
+* `iu-parent-selector`: A CSS selector that matches which parent you want the loading classes to be applied to. If not found or not set, it's applied to the immediate parent. Optional.
 * `iu-load-class`: Change class that is added to the parent when the `link()` function on the directive is called. Optional. Default `iu-load`.  
 * `iu-complete-class`: Change class that is added to the parent when the image element finished loading. Optional. Default `iu-complete`.
 * `iu-error-class`: Change class that is added to the parent when the image element fails to load. Optional. Default `iu-error`.
