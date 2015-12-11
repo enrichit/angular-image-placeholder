@@ -1,6 +1,6 @@
 {
   "name": "angular-image-utils",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A small collection of directives to help with the loading of images.",
   "main": "index.js",
   "dependencies": {
