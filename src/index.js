@@ -25,7 +25,7 @@ angular.module('enrichit.angular-image-utils').directive('iuSpinner', [
     
     function getParent(element, targetSelector) {
       if (targetSelector) {
-        var $lookup = $document.find(parentsUntil(element[0], '.masonry-card'));
+        var $lookup = $document.find(parentsUntil(element[0], targetSelector));
         if ($lookup.length) {
           return $lookup;
         }
