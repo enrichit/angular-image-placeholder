@@ -46,12 +46,14 @@ angular.module('enrichit.angular-image-utils').directive('iuSpinner', [
 
         parent.addClass(loadClass);
 
+        var spinnerContainer = getParent(element, attributes.iuSpinnerContainer);
+
         if (attributes.iuTemplateString) {
-          parent.append($compile(attributes.iuTemplateString)(scope));
+          spinnerContainer.append($compile(attributes.iuTemplateString)(scope));
         } else if(attributes.iuTemplateUrl) {
           $http.get(attributes.iuTemplateUrl, { cache: $templateCache })
             .success(function(response) {
-              parent.append($compile(response)(scope));
+              spinnerContainer.append($compile(response)(scope));
             });
         }
 

@@ -81,7 +81,7 @@ describe('Unit: iuSpinner directive.', function () {
     expect($elem.find('img').length).toBe(0);
     expect($elem.find('p').length).toBe(1);
   });
-  
+
   it('replaces img with template on error', function() {
     $elem = _compile_('<div><img iu-spinner iu-error-replace-url="test.html" /></div>')(_rootScope_);
     $elem.find('img').triggerHandler('error');
@@ -89,25 +89,37 @@ describe('Unit: iuSpinner directive.', function () {
     expect($elem.find('img').length).toBe(0);
     expect($elem.find('p').length).toBe(1);
   });
-  
-  it('allows you to configure the selector loader classes get applied to', function() {
+
+  var spinner = function() {
     var c1 = document.createElement('div');
     var c2 = document.createElement('div');
     var c3 = document.createElement('div');
-
-    c1.classList.add('testing');
 
     var img = document.createElement('img');
     
     img.setAttribute('iu-spinner', '');
     img.setAttribute('iu-parent-selector', '.testing');
+    img.setAttribute('iu-template-string', '<p>Hello World!</p>');
+    img.setAttribute('iu-spinner-container', '.testing');
     
-    c1.appendChild(c2.appendChild(c3.appendChild(img)));
-    
-    angular.element(document).find('body').append(container);
-    var container = _compile_(c1)(_rootScope_);
+    c3.appendChild(img)
+    c2.appendChild(c3)
+    c1.appendChild(c2);
 
+    c1.className = 'testing';
+    
+    $('body').append(c1);
+    return _compile_(c1)(_rootScope_);
+  }
+
+  it('allows you to configure the selector loader classes get applied to', function() {
+    var container = spinner();
     expect(container.hasClass('iu-load')).toBe(true);
     expect(container.hasClass('testing')).toBe(true);
+  });
+
+  it('allows you to to set the parent selector class', function() {
+    var container = spinner();
+    expect($(container).find('> p').length).toBe(1);
   });
 });
