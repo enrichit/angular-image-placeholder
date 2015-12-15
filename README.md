@@ -18,8 +18,6 @@ Setting the `width` and `height` attributes on an image can be desirable if you 
 
 This is a simple little directive which dynamically sets those attributes while the image loads and removes those attributes once it that is done to restore the natural flow.
 
-Simple:
-
     <img iu-sizes iu-width="1024" iu-height="768" ng-src="{{image}}" />
 
 Which **before load** in a parent container that is 500px wide will yield:
@@ -27,6 +25,12 @@ Which **before load** in a parent container that is 500px wide will yield:
     <img iu-sizes width="500" height="375" iu-width="1024" iu-height="768" src="..." ng-src="..." />
 
 As mentioned before, after load those `width` and `height` attributes will be removed.
+
+You can also get the sizes to be applied to a parent element and then have them removed when a child element triggers the load event.
+
+    <div iu-sizes iu-width="1024" iu-height="768" ng-src="{{image}}">
+      <img iu-sizes-image-element ng-src="..." />
+    </div>
 
 ### Spinner
 

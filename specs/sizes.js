@@ -113,4 +113,16 @@ describe('Unit: iuSizes directive.', function () {
     expect($image.attr('width')).toBe('2000');
     expect($image.attr('height')).toBe('1500');
   });
+
+  it('it can trigger load on parent elements', function () {
+    var $elem = _compile_('<div iu-sizes iu-width="1024" iu-height="768"><img iu-sizes-image-element ng-src="http://lorempixel.com/1000/1000/" /></div>')(_rootScope_);
+
+    expect($elem.attr('width')).toBe('1024');
+    expect($elem.attr('height')).toBe('768');
+
+    $elem.find('img').trigger('load');
+
+    expect($elem.attr('width')).toBeUndefined();
+    expect($elem.attr('height')).toBeUndefined();
+  });
 });

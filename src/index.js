@@ -92,6 +92,22 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
       });
     });
     
+    function setWidthOnElement(element, width) {
+      if (width === null) {
+        element.removeAttr('width');
+      } else {
+        element.attr('width', width);
+      }
+    }
+    
+    function setHeightOnElement(element, height) {
+      if (height === null) {
+        element.removeAttr('height');
+      } else {
+        element.attr('height', height);
+      }
+    }
+    
     function getComputedWidth(element) {
       var style;
  
@@ -102,6 +118,11 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
       }
       
       return parseInt(style);
+    }
+    
+    function clearAttributes(element) {
+      setWidthOnElement(element, null);
+      setHeightOnElement(element, null);
     }
 
     function setAttributes(element, x, y, scaleUp) {
@@ -117,15 +138,25 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
             height = (computedWidth / x) * y;
           }
         }
-  
-        element.attr('width', width);
-        element.attr('height', height);
+ 
+        setWidthOnElement(element, width);
+        setHeightOnElement(element, height);
       };
     }
 
     return {
       restrict: 'A',
-      link: function(scope, element, attributes) {
+      controller: [
+
+        '$element',
+
+        function($element) {
+          this.triggerLoad = function(element) {
+            $element.trigger('load');
+          };
+        }
+      ],
+      link: function(scope, element, attributes, controller) {
         var x = parseInt(attributes.iuWidth);
         var y = parseInt(attributes.iuHeight);
         var scaleUp = Boolean(attributes.iuScaleUp);
@@ -140,10 +171,21 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
         var index = resizeCallbacks.length - 1;
 
         element.on('load', function() {
-          element.removeAttr('width');
-          element.removeAttr('height');
-
+          clearAttributes(element);
           resizeCallbacks[index] = null;
+        });
+      }
+    };
+  }
+]);
+
+angular.module('enrichit.angular-image-utils').directive('iuSizesImageElement', [
+  function() {
+    return {
+      require: '?^iuSizes',
+      link: function(scope, element, attributes, controller) {
+        element.on('load', function() {
+          controller.triggerLoad();
         });
       }
     };
