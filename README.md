@@ -28,8 +28,8 @@ As mentioned before, after load those `width` and `height` attributes will be re
 
 You can also get the sizes to be applied to a parent element and then have them removed when a child element triggers the load event.
 
-    <div iu-sizes iu-width="1024" iu-height="768" ng-src="{{image}}">
-      <img iu-sizes-image-element ng-src="..." />
+    <div iu-sizes iu-width="1024" iu-height="768">
+      <img iu-sizes-element ng-src="..." />
     </div>
 
 ### Spinner
@@ -59,6 +59,12 @@ So to clarify, when the image has loaded the HTML will look like this:
     </div>
 
 You can customize the class names. Refer to the API below.
+
+You can also get the spinner to attach to a parent container and then be removed in a similar way to `iu-sizes`.
+
+    <div iu-spinner iu-template-string="<span class='spinner'></div>">
+      <img iu-sizes-element ng-src="..." />
+    </div>
 
 ## Attributes
 

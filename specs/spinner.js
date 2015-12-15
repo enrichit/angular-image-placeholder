@@ -122,4 +122,11 @@ describe('Unit: iuSpinner directive.', function () {
     var container = spinner();
     expect($(container).find('> p').length).toBe(1);
   });
+
+  it('can trigger receive load events from iu-image-element', function () {
+    $elem = _compile_('<div><div iu-spinner iu-template-string="<p>Hello World!</p>"><img iu-image-element /></div></div>')(_rootScope_);
+
+    expect($elem.find('> p').length).toBe(1);
+    $elem.find('img').triggerHandler('load');
+  });
 });

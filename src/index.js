@@ -36,6 +36,16 @@ angular.module('enrichit.angular-image-utils').directive('iuSpinner', [
 
     return {
       restrict: 'A',
+      controller: [
+
+        '$element',
+
+        function($element) {
+          this.triggerLoad = function(element) {
+            $element.trigger('load');
+          };
+        }
+      ],
       link: function(scope, element, attributes) {
         var parent = getParent(element, attributes.iuParentSelector);
         if ( ! parent) return;
@@ -92,22 +102,6 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
       });
     });
     
-    function setWidthOnElement(element, width) {
-      if (width === null) {
-        element.removeAttr('width');
-      } else {
-        element.attr('width', width);
-      }
-    }
-    
-    function setHeightOnElement(element, height) {
-      if (height === null) {
-        element.removeAttr('height');
-      } else {
-        element.attr('height', height);
-      }
-    }
-    
     function getComputedWidth(element) {
       var style;
  
@@ -121,8 +115,8 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
     }
     
     function clearAttributes(element) {
-      setWidthOnElement(element, null);
-      setHeightOnElement(element, null);
+      element.css('width', '');
+      element.css('height', '');
     }
 
     function setAttributes(element, x, y, scaleUp) {
@@ -139,8 +133,8 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
           }
         }
  
-        setWidthOnElement(element, width);
-        setHeightOnElement(element, height);
+        element.css('width', width);
+        element.css('height', height);
       };
     }
 
@@ -179,13 +173,14 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
   }
 ]);
 
-angular.module('enrichit.angular-image-utils').directive('iuSizesImageElement', [
+angular.module('enrichit.angular-image-utils').directive('iuImageElement', [
   function() {
     return {
-      require: '?^iuSizes',
+      require: ['?^iuSizes', '?^iuSpinner'],
       link: function(scope, element, attributes, controller) {
         element.on('load', function() {
-          controller.triggerLoad();
+          if (controller[0]) controller[0].triggerLoad();
+          if (controller[1]) controller[1].triggerLoad();
         });
       }
     };

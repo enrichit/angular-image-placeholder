@@ -1,7 +1,7 @@
 describe('Unit: iuSizes directive.', function () {
   var _compile_, _rootScope_, _window_;
 
-  function createPlaything(containerWidth, padding, optionalImageAttributes) {
+  function createPlaything(containerWidth, padding, optionalImagecssibutes) {
     var container = document.createElement('div');
 
     if (containerWidth) {
@@ -18,9 +18,9 @@ describe('Unit: iuSizes directive.', function () {
     img.setAttribute('iu-width', '1024');
     img.setAttribute('iu-height', '768');
 
-    optionalImageAttributes = optionalImageAttributes || {};
-    for (var attr in optionalImageAttributes) {
-      img.setAttribute(attr, optionalImageAttributes[attr]);
+    optionalImagecssibutes = optionalImagecssibutes || {};
+    for (var css in optionalImagecssibutes) {
+      img.setAttribute(css, optionalImagecssibutes[css]);
     }
 
     container.appendChild(img);
@@ -50,8 +50,8 @@ describe('Unit: iuSizes directive.', function () {
   it('it exists and test framework is set up correctly', function () {
     $elem = _compile_('<img iu-sizes iu-width="1024" iu-height="768" ng-src="http://lorempixel.com/1000/1000/" />')(_rootScope_);
 
-    expect($elem.attr('width')).toBe('1024');
-    expect($elem.attr('height')).toBe('768');
+    expect($elem.css('width')).toBe('1024px');
+    expect($elem.css('height')).toBe('768px');
   });
   
   it('does not require an isolatead scope', function() {
@@ -62,14 +62,14 @@ describe('Unit: iuSizes directive.', function () {
 
   it('doesn\'t resize when container is bigger than it', function () {
     var $image = createPlaything(2000).find('img');
-    expect($image.attr('width')).toBe('1024');
-    expect($image.attr('height')).toBe('768');
+    expect($image.css('width')).toBe('1024px');
+    expect($image.css('height')).toBe('768px');
   });
 
   it('resizes when parent container is smaller than original height', function () {
     var $image = createPlaything(500).find('img');
-    expect($image.attr('width')).toBe('500');
-    expect($image.attr('height')).toBe('375');
+    expect($image.css('width')).toBe('500px');
+    expect($image.css('height')).toBe('375px');
   });
 
   it('doesn\'t throw error when no parent container is found', function () {
@@ -82,8 +82,8 @@ describe('Unit: iuSizes directive.', function () {
     var $image = createPlaything(2000).find('img');
     $image.triggerHandler('load');
 
-    expect($image.attr('width')).toBeUndefined();
-    expect($image.attr('height')).toBeUndefined();
+    expect($image.css('width')).toBe('0px');
+    expect($image.css('height')).toBe('0px');
   });
 
   it('adjusts as you resize the container when loading', function() {
@@ -93,16 +93,16 @@ describe('Unit: iuSizes directive.', function () {
     $plaything[0].style.width = '500px';
     angular.element(_window_).triggerHandler('resize');
 
-    expect($image.attr('width')).toBe('500');
-    expect($image.attr('height')).toBe('375');
+    expect($image.css('width')).toBe('500px');
+    expect($image.css('height')).toBe('375px');
   });
   
   it('ignores padding of parent element', function() {
     var $plaything = createPlaything(500, 10);
     var $image = $plaything.find('img');
 
-    expect($image.attr('width')).toBe('500');
-    expect($image.attr('height')).toBe('375');
+    expect($image.css('width')).toBe('500px');
+    expect($image.css('height')).toBe('375px');
   });
   
   it('allows you to set scale up with option when container is larger than element', function() {
@@ -110,19 +110,19 @@ describe('Unit: iuSizes directive.', function () {
       'iu-scale-up': 'true'
     }).find('img');
 
-    expect($image.attr('width')).toBe('2000');
-    expect($image.attr('height')).toBe('1500');
+    expect($image.css('width')).toBe('2000px');
+    expect($image.css('height')).toBe('1500px');
   });
 
   it('it can trigger load on parent elements', function () {
-    var $elem = _compile_('<div iu-sizes iu-width="1024" iu-height="768"><img iu-sizes-image-element ng-src="http://lorempixel.com/1000/1000/" /></div>')(_rootScope_);
+    var $elem = _compile_('<div iu-sizes iu-width="1024" iu-height="768"><img iu-image-element ng-src="http://lorempixel.com/1000/1000/" /></div>')(_rootScope_);
 
-    expect($elem.attr('width')).toBe('1024');
-    expect($elem.attr('height')).toBe('768');
+    expect($elem.css('width')).toBe('1024px');
+    expect($elem.css('height')).toBe('768px');
 
     $elem.find('img').trigger('load');
 
-    expect($elem.attr('width')).toBeUndefined();
-    expect($elem.attr('height')).toBeUndefined();
+    expect($elem.css('width')).toBe('0px');
+    expect($elem.css('height')).toBe('0px');
   });
 });
