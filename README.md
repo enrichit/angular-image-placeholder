@@ -10,6 +10,8 @@ Currently available on bower. Hoping to make it available on NPM also.
 
     bower install angular-image-utils --save
 
+Lodash is also required for debouncing window resize events. It's not a hard requirement but without it your browser may struggle to keep up with the hundreds of function calls that get fired on resize. This depends very much on how many images you are loading and if you're concerned whether the user is resizing the browser before the images have finished loadin, it's at your discretion. Just in case you want to though (and you should cause lodash is amazing) lodash is defined as a dependency in bower so it's as simple as including it before you include this script.
+
 ## Usage
 
 ### Sizes
