@@ -93,8 +93,11 @@ describe('Unit: iuSizes directive.', function () {
     $plaything[0].style.width = '500px';
     angular.element(_window_).triggerHandler('resize');
 
-    expect($image.css('width')).toBe('500px');
-    expect($image.css('height')).toBe('375px');
+    // resize event is debounced. it waits 100ms to fire
+    setTimeout(function() {
+      expect($image.css('width')).toBe('500px');
+      expect($image.css('height')).toBe('375px');
+    }, 200);
   });
   
   it('ignores padding of parent element', function() {
@@ -112,6 +115,16 @@ describe('Unit: iuSizes directive.', function () {
 
     expect($image.css('width')).toBe('2000px');
     expect($image.css('height')).toBe('1500px');
+  });
+  
+  it('alerts the user then lodash is not defined', function() {
+    spyOn(console, 'warn');
+    var lodash = angular.copy(_);
+    window._ = null;
+    createPlaything(2000);
+    angular.element(_window_).triggerHandler('resize');
+    expect(console.warn).toHaveBeenCalled();
+    window._ = lodash;
   });
 
   it('it can trigger load on parent elements', function () {

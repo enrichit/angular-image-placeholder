@@ -96,12 +96,28 @@ angular.module('enrichit.angular-image-utils').directive('iuSizes', [
     'use strict';
 
     var resizeCallbacks = [];
-    angular.element($window).on('resize', function() {
+
+    // check that lodash and the debounce method is defined
+    if (typeof _ === 'function' && _.VERSION && _.debounce) {
+      _.debounce(resize, 100);
+    } else {
+      /**
+       * Also while we\'re at it, why aren\'t you using lodash? It's awesome!
+       */
+      console.warn([
+        'ALERT! lodash is not defined, make sure you have included the lodash before `angular-image-utils`. ',
+        'Resize events are not being debounced, this could cause undue stress on your poor browser when you resize the window.'
+      ].join(''));
+
+      angular.element($window).on('resize', resize);
+    }
+    
+    function resize() {
       resizeCallbacks.forEach(function(c) {
         if (c instanceof Function) c();
       });
-    });
-    
+    }
+
     function getComputedWidth(element) {
       var style;
  
