@@ -93,8 +93,9 @@ You can also get the spinner to attach to a parent container and then be removed
 * Add to NPM directory.
 * Add ngDocs.
 
-## Tests
+## Building
 
 1. Use bower to pull down frontend test dependencies. `bower install`.
 2. Install the dependencies specified in `package.json`. `npm install`.
-3. Run the tests with npm. `npm test`.
+3. Run the tests with npm. `npm test` or gulp `gulp test`. 
+4. Run the build with `gulp build`.
